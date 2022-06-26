@@ -1,5 +1,4 @@
 //dependencies
-// path module
 const path = require("path");
 // dotenv file for sensitive configuration information
 require("dotenv").config();
@@ -23,7 +22,7 @@ const hbs = exphbs.create({ helpers });
 
 // Initialize sessions
 const sess = {
-  secret: process.env.DB_SESSION_SECRET,
+  secret: process.env.DB_SECRET,
   cookie: { maxAge: 7200000 },
   resave: false,
   saveUninitialized: true,
@@ -42,6 +41,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Set handlebars as the template engine for the server
 app.engine("handlebars", hbs.engine);
+
 app.set("view engine", "handlebars");
 
 // Express parse JSON and string data
