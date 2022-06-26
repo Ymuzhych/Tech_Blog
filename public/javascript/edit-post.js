@@ -1,27 +1,31 @@
+// A function to edit a post
 async function editFormHandler(event) {
   event.preventDefault();
 
-  const title = document.querySelector('input[name="post-title"]').value;
-  const post_content = document
-    .querySelector('textarea[name="post-content"]')
-    .value.trim();
-  const post_id = window.location.toString().split("/")[
+  // get the post id from the url
+  const id = window.location.toString().split("/")[
     window.location.toString().split("/").length - 1
   ];
 
-  const response = await fetch(`/api/posts/${post_id}`, {
+  // Get the post title and post text from the form
+  const title = document.querySelector('input[name="post-title"]').value;
+  const post_text = document.querySelector('textarea[name="post-text"]').value;
+
+  // use the update route to update the post
+  const response = await fetch(`/api/posts/${id}`, {
     method: "PUT",
     body: JSON.stringify({
       title,
-      post_content,
+      post_text,
     }),
     headers: {
       "Content-Type": "application/json",
     },
   });
-
+  // if the edit action is successful, redirect to the dashboard page, otherwise display the error
   if (response.ok) {
     document.location.replace("/dashboard");
+    // otherwise, display the error
   } else {
     alert(response.statusText);
   }

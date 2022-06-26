@@ -1,16 +1,19 @@
+// A function to delete a post
 async function deleteFormHandler(event) {
   event.preventDefault();
 
-  const post_id = window.location.toString().split("/")[
+  // get the post id from the url
+  const id = window.location.toString().split("/")[
     window.location.toString().split("/").length - 1
   ];
-
-  const response = await fetch(`/api/posts/${post_id}`, {
+  // delete the post with an async function
+  const response = await fetch(`/api/posts/${id}`, {
     method: "DELETE",
   });
-
+  // if the delete action is successful, redirect to the dashboard page, otherwise display the error
   if (response.ok) {
     document.location.replace("/dashboard");
+    // otherwise, display the error
   } else {
     alert(response.statusText);
   }

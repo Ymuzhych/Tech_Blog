@@ -1,8 +1,13 @@
+// Post model
+
+// Dependencies
+// sequelize model, datatypes, and database connection
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
+// the Post model extends the sequelize model
 class Post extends Model {}
-
+// define the table columns and configuration, similar to the setup for the User model
 Post.init(
   {
     id: {
@@ -14,14 +19,12 @@ Post.init(
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: [1],
-      },
     },
-    content: {
-      type: DataTypes.STRING,
+    post_text: {
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
+        // post must be at least one character long
         len: [1],
       },
     },
@@ -41,4 +44,5 @@ Post.init(
   }
 );
 
+// Export the model
 module.exports = Post;
