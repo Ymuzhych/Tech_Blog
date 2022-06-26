@@ -1,20 +1,14 @@
-// Dependencies, the router and the database
 const router = require("express").Router();
 const sequelize = require("../config/connection");
-// the models
 const { Post, User, Comment } = require("../models");
-// the authorization middleware to redirect unauthenticated users to the login page
 const withAuth = require("../utils/auth");
 
-// A route to render the dashboard page, only for a logged in user
 router.get("/", withAuth, (req, res) => {
-  // All of the users posts are obtained from the database
   Post.findAll({
     where: {
-      // use the ID from the session
       user_id: req.session.user_id,
     },
-    attributes: ["id", "post_text", "title", "created_at"],
+    attributes: ["id", "title", "content", "created_at"],
     include: [
       {
         model: Comment,
@@ -31,9 +25,15 @@ router.get("/", withAuth, (req, res) => {
     ],
   })
     .then((dbPostData) => {
-      // serialize data before passing to template
-      const posts = dbPostData.map((post) => post.get({ plain: true }));
-      res.render("dashboard", { posts, loggedIn: true });
+      const posts = dbPostData.map((post) =>
+        post.get({
+          plain: true,
+        })
+      );
+      res.render("dashboard", {
+        posts,
+        loggedIn: true,
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -41,14 +41,12 @@ router.get("/", withAuth, (req, res) => {
     });
 });
 
-// A route to edit a post
 router.get("/edit/:id", withAuth, (req, res) => {
-  // All of the users posts are obtained from the database
   Post.findOne({
     where: {
       id: req.params.id,
     },
-    attributes: ["id", "post_text", "title", "created_at"],
+    attributes: ["id", "title", "content", "created_at"],
     include: [
       {
         model: Comment,
@@ -65,14 +63,21 @@ router.get("/edit/:id", withAuth, (req, res) => {
     ],
   })
     .then((dbPostData) => {
-      // return an error
       if (!dbPostData) {
-        res.status(404).json({ message: "No post found with this id" });
+        res.status(404).json({
+          message: "No post found with this id",
+        });
         return;
       }
-      // serialize data before passing to template
-      const post = dbPostData.get({ plain: true });
-      res.render("edit-post", { post, loggedIn: true });
+
+      const post = dbPostData.get({
+        plain: true,
+      });
+
+      res.render("edit-post", {
+        post,
+        loggedIn: true,
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -80,32 +85,10 @@ router.get("/edit/:id", withAuth, (req, res) => {
     });
 });
 
-// A route to edit the logged in user
-router.get("/edituser", withAuth, (req, res) => {
-  // Acess the User model and run the findOne() method 
-  User.findOne({
-    // when the data is sent back, exclude the password property
-    attributes: { exclude: ["password"] },
-    where: {
-      // use id as the parameter for the request
-      id: req.session.user_id,
-    },
-  })
-    .then((dbUserData) => {
-      if (!dbUserData) {
-        // no found return an error
-        res.status(404).json({ message: "No user found with this id" });
-        return;
-      }
-      //return the data for the requested user
-      const user = dbUserData.get({ plain: true });
-      res.render("edit-user", { user, loggedIn: true });
-    })
-    .catch((err) => {
-      // return that error
-      console.log(err);
-      res.status(500).json(err);
-    });
+router.get("/new", (req, res) => {
+  res.render("add-post", {
+    loggedIn: true,
+  });
 });
 
 module.exports = router;

@@ -8,22 +8,33 @@ html {
     padding: 0;
     margin: 0;
     font-family: sans-serif;
-    color: #333;
+    color: rgb(25, 55, 58);
+}
+
+main,
+.site-name {
+    background-color: #53f4e7;
+}
+
+a,
+.btn-no-style,
+#comment-subtitle {
+    color: #41e0da;
+}
+
+a:hover,
+.btn-no-style:hover {
+    color: #3486eb;
 }
 
 a {
     text-decoration: none;
-    color: #225ca3;
     font-weight: bold;
     transition: color .1s;
 }
 
-a:hover {
-    color: #3486eb;
-}
-
 button {
-    background-color: #225ca3;
+    background-color: #436691;
     border: 0;
     padding: 1%;
     color: white;
@@ -41,6 +52,10 @@ button:hover {
     margin: 0;
     padding: 0;
     list-style-type: none;
+}
+
+.go-back {
+    color: #2c2307;
 }
 
 textarea,
@@ -78,32 +93,71 @@ form label {
     flex-direction: column;
 }
 
+.info-section {
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+header,
+.site-row,
+.info-section,
+.form-heading {
+    background-color: #1e0e68;
+}
+
+.login-page,
+.sign-in-page,
+.new-form-page,
+.edit-form-page {
+    border: 3px solid black;
+    padding-bottom: 10px;
+}
+
+.form-heading {
+    padding: 10px;
+}
+
+.info-section,
+.content-section,
+.form-section,
+.sign-in-link,
+.login-link {
+    padding-left: 10px;
+}
+
+.post-name,
+.post-title-section,
+.new-page {
+    padding-top: 10px;
+}
+
 header {
-    border-bottom: 1px solid #ccc;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 1%;
-    background-color: #333;
 }
 
 header h1 {
     font-size: 1em;
-    border: 2px outset #7d7d7d;
-    border-radius: 5px;
-    background-color: #ccc;
-    padding: 1.25rem;
+}
+
+.site-row {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    justify-content: center;
+}
+
+.site-name {
+    margin-bottom: 10px;
+    padding: 0px 10px;
+    border-style: double;
 }
 
 main {
     flex: 1;
     padding: 2% 4%;
-}
-
-nav {
-    padding: 1.2rem;
-    text-align: right;
-    white-space: pre;
 }
 
 .btn-no-style {
@@ -112,7 +166,6 @@ nav {
     padding: 0;
     cursor: pointer;
     text-decoration: none;
-    color: #225ca3;
     font-size: 100%;
     font-weight: bold;
     transition: color .1s;
@@ -121,7 +174,6 @@ nav {
 
 .btn-no-style:hover {
     background: none;
-    color: #3486eb;
 }
 
 .delete-post-btn {
@@ -135,32 +187,19 @@ nav {
 .post {
     margin-bottom: 2%;
     line-height: 150%;
-}
-
-.post .title {
-    font-style: italic;
-    font-size: 1.25rem;
-    color: #7d7d7d;
+    border: 3px solid black;
 }
 
 .post .title span {
     font-style: italic;
-    font-size: 0.8rem;
+    font-size: 90%;
     color: #7d7d7d;
 }
 
 .edit-link {
     display: block;
     margin: -1.5% 0 2% 0;
-}
-
-.upvote-btn {
-    background-color: #197d0f;
-    transition: background-color .1s;
-}
-
-.upvote-btn:hover {
-    background-color: #1f9c13;
+    color: #2c2307;
 }
 
 .comment-form {
@@ -173,7 +212,7 @@ nav {
 }
 
 .comment:nth-child(odd) {
-    background-color: #f0f5ff;
+    background-color: #fff5eb;
 }
 
 .comment .meta {
@@ -182,28 +221,48 @@ nav {
     opacity: .6;
 }
 
-.new-post-form input,
-textarea {
-    width: 80%;
+.new-post-form input {
+    width: 300px;
 }
 
 .edit-post-form {
     margin-bottom: 5%;
 }
 
-.row {
-    display: flex;
+#comment-subtitle {
+    font-size: 12px;
+    font-style: italic;
 }
 
-.column {
-    flex: 50%;
-    padding: 1.25rem;
-}
-
-footer {
-    border-top: 1px solid #ccc;
+.new-post-section {
     display: flex;
     justify-content: center;
-    padding: 1%;
-    font-size: 110%;
+}
+
+#create-new-post {
+    width: 15%;
+}
+
+.sign-in-link,
+.login-link {
+    color: #2c2307;
+}
+
+.form-heading h1,
+.form-heading h2 {
+    color: #20c5d4;
+}
+
+.login-form,
+.signup-form,
+.post-content,
+.post-title-section {
+    padding: 10px 10px 0px 0px;
+}
+
+.entry-field,
+.login-signup-btn,
+.btn,
+#post-title {
+    width: 100%;
 }
