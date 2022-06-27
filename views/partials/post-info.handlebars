@@ -6,8 +6,12 @@
             </div>
             <div class="created-by">
                 <p id="comment-subtitle">
-                    Posted by <b>{{user.username}} </b> on <b>{{formatDate created_at}}</b>
+                     <b>{{user.username}} </b> on <b>{{formatDate created_at}}</b>
+                     <a href="https://twitter.com/{{user.twitter}}"><i class="fab fa-twitter"></i></a> 
+                     <a href="https://github.com/{{user.github}}"><i class="fab fa-github"></i></a>
                 </p>
+                
+            </div>
             </div>
         </div>
         <div class="content-section">
